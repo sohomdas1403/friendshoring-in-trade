@@ -21,15 +21,15 @@ attributes of each dyadic country-pair so that the effect of geopolitical intere
 be further isolated.
 
 ## Methodology
-Dyadic (country-pair) datasets for trade volume, geopolitical distance, cultural distance, 
-linguistic distance, and geographic distance will be transformed into 5 country-level data 
-matrices — one for each attribute variable. These will be square matrices, with the rows and 
+Dyadic (country-pair) datasets for trade volume, geopolitical distance, cultural distance, religious 
+distance, linguistic distance, and geographic distance will be transformed into 6 country-level 
+data matrices — one for each attribute variable. These will be square matrices, with the rows and 
 columns both being all the countries in the dataset. The cell entries will be the respective values 
 of each attribute variable for the dyadic relationship between those two countries. This will be 
 done for 2015, which is the year before President Trump first entered office, and 2021, which is 
 one year after the outbreak of COVID-19. This also avoids potential confounding factors from 
 the Russo-Ukrainian War, which started in 2022.  
-The five attribute matrices will be combined into a single country-level feature set, with 
+The six attribute matrices will be combined into a single country-level feature set, with 
 dimensionality reduction (PCA) applied to manage the high-dimensional space before clustering. 
 This allows for the application of a hierarchical clustering algorithm separately on the 2015 and 
 2021 datasets, clustering countries based on the similarities of their attributes across all country
@@ -40,7 +40,7 @@ alliances more closely as compared to the clustering for 2015, that will serve a
 presence of friendshoring.  
 While the methodology would benefit from conducting the clustering for several years, the lack 
 of availability of data for all variables makes this impossible. However, the timeliness and choice 
-of the years in question mean that significant results may yet be yielded.
+of the years in question mean that significant results may yet be yielded. 
 
 ## Data Sources
 Trade Volume: IMF and Correlates of War (COW) 
