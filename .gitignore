@@ -209,3 +209,4 @@ __marimo__/
 # ====== CUSTOM RULES FOR PROJECT ======
 data/raw/*.csv
 data/raw/*.dta
+data/raw/*.Rhistory
