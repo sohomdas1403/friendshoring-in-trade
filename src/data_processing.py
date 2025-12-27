@@ -33,8 +33,8 @@ df_religiousdistance = df_religiousdistance[df_religiousdistance['year'].isin([2
 df_agreement.columns = df_agreement.columns.str.replace('ccode', 'countrycode_')
 df_tradevolume.columns = (
     df_tradevolume.columns
-        .str.replace('COUNTERPART_COUNTRY', 'countrycode_2')
-        .str.replace('COUNTRY', 'countrycode_1')
+        .str.replace('COUNTERPART_COUNTRY.ID', 'countrycode_2')
+        .str.replace('COUNTRY.ID', 'countrycode_1')
         .str.replace('TIME_PERIOD', 'year')
 )
 
