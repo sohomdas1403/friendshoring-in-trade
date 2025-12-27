@@ -1,2 +1,11 @@
 # friendshoring-in-trade
-DSAP 2025 Final Project
+
+## Setup — Create environment:
+
+python -m venv .venv
+# On Windows:
+.venv\Scripts\activate
+# On Mac/Linux:
+source .venv/bin/activate
+# Install dependencies (to avoid Microsoft Store Python Path Issues):
+python -m pip install -r requirements.txt
