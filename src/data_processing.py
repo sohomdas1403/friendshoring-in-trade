@@ -38,55 +38,57 @@ df_tradevolume.columns = (
         .str.replace('TIME_PERIOD', 'year')
 )
 
-
-
 # Standardise Agreement Score Dataset Country Names from COW Codes to ISO 3166-1 alpha-3 Codes
+"""Remove irrelevant COW Codes (no longer existing countries or no ISO codes)."""
 
-codes_to_remove = [221, 223, 345, 816]  # Historical COW codes no longer valid as of 2021
+codes_to_remove = [221, 223, 345, 816]  # Monaco, Liechtenstein, Yugoslavia, North Vietnam
 df_agreement = df_agreement[
     ~(df_agreement['countrycode_1'].isin(codes_to_remove)) &
     ~(df_agreement['countrycode_2'].isin(codes_to_remove))
 ].copy()
 
-# --- prepare conversion table ---
+"""Filter out invalid or outdated entries before creating the mapping dictionary."""
+
 COW_ISO_conversion_df['valid_until'] = pd.to_numeric(
     COW_ISO_conversion_df['valid_until'], 
-    errors='coerce'  # Non-numeric → NaN
+    errors='coerce'  # convert 'valid_until' to numeric, non-numeric → NaN
 )
-
 
 filtered_conversion_df = COW_ISO_conversion_df[
     (COW_ISO_conversion_df['valid_until'].isna()) |
-    (COW_ISO_conversion_df['valid_until'] >= 2021)
+    (COW_ISO_conversion_df['valid_until'] >= 2021) # filter to only valid or currently valid entries
 ].copy()
 
-# ensure unique mapping & consistent types
+"""Create mapping dictionary from COW codes to ISO codes."""
+
 filtered_conversion_df['cow_id'] = (
     filtered_conversion_df['cow_id']
-    .fillna(-1)
-    .astype(int)
-    .astype(str)
-    .replace('-1', pd.NA)
+    .fillna(-1)             # temporarily fill NaN to allow conversion
+    .astype(int)            # convert to int
+    .astype(str)            # convert to str for mapping
+    .replace('-1', pd.NA)   # revert temporary NaN fill
 )
-filtered_conversion_df = filtered_conversion_df.drop_duplicates(subset='cow_id', keep='last')
+filtered_conversion_df = filtered_conversion_df.drop_duplicates(subset='cow_id', keep='last') # keep most recent valid entry
 
-print(f"DEBUG: Filtered conversion table has {len(filtered_conversion_df)} rows.")
+"""DEBUG Prints to Verify Filtered Conversion Table"""
+print(f"DEBUG: Filtered conversion table has {len(filtered_conversion_df)} rows.") 
 print(f"DEBUG: First few rows of filtered table:\n{filtered_conversion_df[['cow_id', 'iso3', 'valid_until']].head()}")
 
+cow2iso = dict(zip(filtered_conversion_df['cow_id'], filtered_conversion_df['iso3'])) # create mapping dictionary
 
-cow2iso = dict(zip(filtered_conversion_df['cow_id'], filtered_conversion_df['iso3']))
-
+"""DEBUG Prints to Verify Mapping Dictionary"""
 print(f"Dictionary size: {len(cow2iso)}")
 print(f"Sample keys: {list(cow2iso.items())[:5]}")
 
-# --- map into df_agreement (keep original codes until check) ---
-orig1 = df_agreement['countrycode_1'].astype(str)
+"""Map COW codes to ISO 3166-1 alpha-3 Codes in Agreement Score Dataset"""
+
+orig1 = df_agreement['countrycode_1'].astype(str) # convert to str for mapping
 orig2 = df_agreement['countrycode_2'].astype(str)
 
-df_agreement['countrycode_1_iso3'] = orig1.map(cow2iso)
+df_agreement['countrycode_1_iso3'] = orig1.map(cow2iso) # map using dictionary
 df_agreement['countrycode_2_iso3'] = orig2.map(cow2iso)
 
-# --- check/report unmapped codes ---
+"""DEBUG: Identify Unmapped COW Codes"""
 unmapped1 = orig1[df_agreement['countrycode_1_iso3'].isna()].unique()
 unmapped2 = orig2[df_agreement['countrycode_2_iso3'].isna()].unique()
 if len(unmapped1) or len(unmapped2):
@@ -96,7 +98,7 @@ if len(unmapped1) or len(unmapped2):
         list(unmapped1)[:10], list(unmapped2)[:10]
     )
 
-# --- finally replace original columns if you want ---
+"""Re-Standardise Column Names After Mapping and Drop COW Code Columns"""
 df_agreement['countrycode_1'] = df_agreement['countrycode_1_iso3']
 df_agreement['countrycode_2'] = df_agreement['countrycode_2_iso3']
 df_agreement = df_agreement.drop(columns=['countrycode_1_iso3', 'countrycode_2_iso3'])
