@@ -218,8 +218,8 @@ def create_regression_table(model: sm.regression.linear_model.RegressionResultsW
     combined = pd.concat([coef_table, separator, model_stats], sort=False)
 
     # Ensure results directory exists and save
-    out_path = Path(output_path)
-    out_path.parent.mkdir(parents=True, exist_ok=True)
+    out_path = Path(output_path)                        # create Path object for output
+    out_path.parent.mkdir(parents=True, exist_ok=True)  # create parent directories if not existing
     combined.to_csv(out_path)
 
     print(f"Regression table saved to: {out_path}")
@@ -266,8 +266,8 @@ def _plot_and_save_dendrogram(Z, labels, output_path: str, title: str = None,
 
     fig.tight_layout()
 
-    out_path = Path(output_path) # create Path object for output
-    out_path.parent.mkdir(parents=True, exist_ok=True) # create parent directories if not existing
+    out_path = Path(output_path) 
+    out_path.parent.mkdir(parents=True, exist_ok=True) 
     fig.savefig(out_path, dpi=300) # save figure as png
     plt.close(fig)
 
