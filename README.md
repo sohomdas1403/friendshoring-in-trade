@@ -9,7 +9,7 @@ Have geopolitical alliances evolved into comprehensive strategic partnerships si
 These datasets have not been modified in anyway, and are the raw datasets from the original sources. All data cleaning and manipulations are done through the pipeline built in data_loader.py. However, since I use datasets from several different sources for my analysis, I put them all in one open repository for easy access and reproducability. 
 
 Steps:
-1. Download the raw datasets bundle from: https://doi.org/10.5281/zenodo.18112975
+1. Download the raw datasets bundle 'raw.zip' from: https://doi.org/10.5281/zenodo.18112975
 2. Extract the ZIP file. You should see a folder named 'raw' inside. 
 3. Simply place the 'raw' folder inside the 'data/' directory of this project:
 
@@ -75,7 +75,7 @@ Results of the First-Differences Fixed Effects Regression on the data as a basel
 
 ## Project Structure
 
-Expected directory AFTER importing raw data files, BEFORE running main.py:
+***Expected directory AFTER importing raw data files, BEFORE running main.py:***
 
 ```bash
 
