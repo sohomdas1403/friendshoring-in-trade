@@ -3,6 +3,7 @@ import numpy as np
 from sklearn.cluster import AgglomerativeClustering
 from sklearn.metrics import silhouette_score
 from scipy.cluster.hierarchy import linkage
+from pathlib import Path
 
 # Import PCA-transformed matrices and country ordering from data loader
 from .data_loader import feature_matrix_2015_pca, feature_matrix_2021_pca, countries_list
