@@ -464,7 +464,7 @@ def map_and_plot(clusters_df: pd.DataFrame, output_path: str, title: str = None)
     ax.set_title(title or 'Country Clusters')
     ax.set_axis_off()
 
-    os.makedirs(os.path.dirname(output_path), exist_ok=True)
+    Path(output_path).parent.mkdir(parents=True, exist_ok=True)
     plt.savefig(output_path, bbox_inches='tight', dpi=300)
     plt.close(fig)
     print(f"Saved map to {output_path}")

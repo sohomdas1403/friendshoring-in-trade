@@ -125,6 +125,6 @@ def save_clusters_to_csv(results: dict, output_dir: str = 'results'):
         # Save to CSV
         output_path = Path(f'{output_dir}/clusters_{year}.csv') # create Path object for output
         output_path.parent.mkdir(parents=True, exist_ok=True)   # create parent directories if not existing
-        output_df.to_csv(f'{output_dir}/clusters_{year}.csv', index=False)
+        output_df.to_csv(output_path, index=False)
         print(f"Saved clusters for {year} to '{output_dir}/clusters_{year}.csv'")
 
