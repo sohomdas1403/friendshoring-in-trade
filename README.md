@@ -108,3 +108,7 @@ friendshoring-in-trade/
 - Python 3.10.11
 - venv
 - pandas, numpy, scikit-learn, statsmodels, matplotlib, geopandas
+
+## Course Information
+
+Single-Author Final Project for the course "Data Science and Advanced Programming" Master's course at the University of Lausanne. Grade Received : 6/6
