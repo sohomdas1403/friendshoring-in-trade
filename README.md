@@ -6,7 +6,7 @@ Have geopolitical alliances evolved into comprehensive strategic partnerships si
 ## Setup — Prepare Raw Data Files:
 
 ### Download Raw Data Files from Zenodo Open Repository (RECOMMENDED)
-These datasets have not been modified in anyway, and are the raw datasets from the original sources. All data cleaning and manipulations are done through the pipeline built in data_loader.py. However, since I use datasets from several different sources for my analysis, I put them all in one open repository for easy access and reproducability. 
+These datasets have not been modified in any way, and are the raw datasets from the original sources. All data cleaning and manipulations are done through the pipeline built in data_loader.py. However, since I use datasets from several different sources for my analysis, I put them all in one open repository for easy access and reproducibility. 
 
 Steps:
 1. Download the raw datasets bundle 'raw.zip' from: https://doi.org/10.5281/zenodo.18112975
