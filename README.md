@@ -111,4 +111,4 @@ friendshoring-in-trade/
 
 ## Course Information
 
-Single-Author Final Project for the course "Data Science and Advanced Programming" Master's course at the University of Lausanne. Grade Received : 6/6
+Single-Author Final Project for the Master's course "Data Science and Advanced Programming" at the University of Lausanne. Grade Received : 6/6
